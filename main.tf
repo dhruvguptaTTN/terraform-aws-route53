@@ -6,10 +6,7 @@ module "zone" {
             domain_name = "test.internal.com"
             vpc = [
                 {
-                vpc_id = "vpc-999999999"
-                },
-                {
-                vpc_id = "vpc-000000000"
+                vpc_id = "vpc-09aceeb53e4bd8994"
                 },
             ]
             tags = {
