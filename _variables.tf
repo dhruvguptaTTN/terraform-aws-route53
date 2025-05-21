@@ -1,18 +1,12 @@
 variable "create_zone" {
-  description = "Whether to create Route53 zone"
-  type        = bool
-  default     = true
-}
-
-variable "create_records" {
-  description = "Whether to create Route53 records"
+  description = "Whether to create Route53 zones"
   type        = bool
   default     = true
 }
 
 variable "zones" {
-  description = "Map of Route53 zone parameters"
-  type        = any
+  description = "Map of Route53 zones to create"
+  type        = map(any)
   default     = {}
 }
 
@@ -22,32 +16,38 @@ variable "tags" {
   default     = {}
 }
 
-variable "zone_id" {
-  description = "Existing Route53 zone ID (optional override for records module)"
+variable "create_records" {
+  description = "Whether to create Route53 DNS records"
+  type        = bool
+  default     = true
+}
+
+variable "zone_id_override" {
+  description = "Override zone_id for records module if zones module is not used"
   type        = string
   default     = null
 }
 
-variable "zone_name" {
-  description = "Existing Route53 zone name (optional override for records module)"
+variable "zone_name_override" {
+  description = "Override zone_name for records module if zones module is not used"
   type        = string
   default     = null
 }
 
 variable "private_zone" {
-  description = "Whether the zone is private (used in data source for records module)"
+  description = "Whether the zone is private (for records module)"
   type        = bool
   default     = false
 }
 
 variable "records" {
   description = "List of DNS records to create"
-  type        = any
+  type        = list(any)
   default     = []
 }
 
 variable "records_jsonencoded" {
-  description = "List of DNS records as a JSON-encoded string (optional, for Terragrunt compatibility)"
+  description = "JSON encoded list of DNS records (for Terragrunt compatibility)"
   type        = string
   default     = null
 }
